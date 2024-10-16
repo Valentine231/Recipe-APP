@@ -7,19 +7,24 @@ const RecipeDetails = () => {
   const [loading, setLoading] = useState(false);
 
 
-  const Apikey = "30e780a424e848b69622cc793e94c05a";
+  const Apikey = "74153c31338d4bdf8f3de040b57c504c";
 
   useEffect(() => {
-    const fetchRecipes = async () => {
+    const fetchRecipes = async (selecteddiet) => {
       setLoading(true);
       try {
         const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch`,{
           params: {
             apiKey: Apikey,
             query: "chicken", // sample query parameter
-            cuisine: "italian", // sample query parameter
-            diet: "vegetarian", // sample query parameter
+            cuisine: "italian",
+            GlutenFree: "gluten free",
+             Ketogenic: "ketogenic",
+             Vegetarian: "vegetarian", // sample query parameter
+            diet: selecteddiet, // sample query parameter
+            intolerances: "gluten, dairy", // sample query parameter
             addRecipeInformation:true,
+
          
           },
         });
@@ -62,7 +67,7 @@ const RecipeDetails = () => {
  
 
   return (
-    <div className="bg-sky-500/50 h-screen">
+    <div className="bg-sky-500/50  w-full">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -73,11 +78,13 @@ const RecipeDetails = () => {
         <ul>
           {recipes.map((recipe) => (
             <li key={recipe.id}>
+              <div className="mt-2">
                <span>{recipe.title}</span>
                <img src={recipe.image} alt={recipe.title} className="w-80 h-auto" />
               <p>Servings: {recipe.servings}</p>
             <p>Ready in: {recipe.readyInMinutes} minutes</p>
            <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
+           </div>
             </li>
           ))}
         </ul>

@@ -6,7 +6,7 @@ const Searchbar = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const Apikey = "30e780a424e848b69622cc793e94c05a"; // Make sure this is a valid API key
+  const Apikey = "74153c31338d4bdf8f3de040b57c504c"; // Make sure this is a valid API key
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -48,9 +48,12 @@ const Searchbar = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul  className="sticky top-0 ...">
           {results.map((result, index) => (
-            <li key={index}>{result.title}</li> // Display the title of each result
+          
+              <li key={index}>{result.title}</li>
+             
+             // Display the title of each result
           ))}
         </ul>
       )}

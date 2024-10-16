@@ -10,7 +10,7 @@ const Recipelist = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
 
-  const Apikey = "30e780a424e848b69622cc793e94c05a";
+  const Apikey = "74153c31338d4bdf8f3de040b57c504c";
 
 useEffect(() => {
     const fetchRecipes = async () => {
@@ -58,7 +58,7 @@ const handleNewPage = (newPage) => {
   };
 
   return (
-    <div>
+    <div className='bg-sky-300 w-full h-full'>
     <div>
         <h1 className="text-gray-700 font-bold text-2xl">Recipe List</h1>
 
@@ -68,9 +68,9 @@ const handleNewPage = (newPage) => {
     {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className="flex items-center justify-between gap-4 p-4">
           {recipeslist.map((recipe, index) => (
-            <div className="flex items-center justify-between gap-4 p-4">
+            <div >
             <li key={index} >
                 {recipe.title}
                 <img src={recipe.image} alt={recipe.title} />
@@ -80,7 +80,7 @@ const handleNewPage = (newPage) => {
         </ul>
       )}
     {total > limit && (
-        <div>
+        <div className='flex justify-center'>
           <button  onClick={() => handleNewPage(currentPage - 1)}
             disabled={currentPage === 1} className='mr-2 bg-slate-500 text-white'
             >Previous</button>
