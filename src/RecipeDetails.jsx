@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const RecipeDetails = () => {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [favouriteRecipe, setFavouriteRecipe] = useState([]);
+  const [FavouriteRecipe, setFavouriteRecipe] = useState([]);
+  const navigate = useNavigate();
+
 
 
   const Apikey = "74153c31338d4bdf8f3de040b57c504c";
@@ -48,14 +51,6 @@ const RecipeDetails = () => {
     console.log(recipes);
   },[recipes])
 
-  useEffect(()=>{
-    const storedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    setFavouriteRecipe(storedFavorites);
-  },[])
-
-  useEffect(() => {
-    localStorage.setItem("favoriteRecipes", JSON.stringify(favouriteRecipe));
-  }, [favouriteRecipe]);
 
   const handleError = (error) => {
     if (error.response) {
@@ -68,12 +63,22 @@ const RecipeDetails = () => {
   };
 
   const Handlefavorite = (recipe) => {
-    if (!favouriteRecipe.includes(recipe)) {
-      setFavouriteRecipe([...favouriteRecipe, recipe.id]);
-      localStorage.setItem("favoriteRecipes", JSON.stringify(favouriteRecipe));
+    // Retrieve existing favorites from local storage
+    const existingFavourites = JSON.parse(localStorage.getItem('favouriteRecipe')) || [];
+    
+    // Check if the recipe already exists in favorites
+    const isFavorite = existingFavourites.some(fav => fav.id === recipe.id); // Assuming each recipe has a unique 'id'
+
+    if (!isFavorite) {
+        const updatedFavourites = [...existingFavourites, recipe]; // Add new favorite
+        setFavouriteRecipe(updatedFavourites); // Update state
+        localStorage.setItem('favouriteRecipe', JSON.stringify(updatedFavourites)); // Save to local storage
+    } else {
+        console.log("This recipe is already in your favorites!");
     }
-    console.log(favouriteRecipe)
-  }
+
+    navigate('/favouriteRecipe'); // Navigate to favorites
+};
  
 
   return (

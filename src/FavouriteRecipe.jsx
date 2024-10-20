@@ -1,42 +1,35 @@
-
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-const FavoriteRecipes = ({ recipes }) => {
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+const FavouriteRecipes = () => {
+    const [favouriteRecipes, setFavouriteRecipes] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
 
-  // Load favorite recipes from local storage
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem('favoriteRecipes');
-    if (storedFavorites) {
-      try {
-        setFavoriteRecipes(JSON.parse(storedFavorites));
-      } catch (error) {
-        console.error('Error parsing favorite recipes from local storage:', error);
-      }
-    }
-  }, []);
-  // Filter recipes to show only favorites
-  const favoriteList = recipes ? recipes.filter((recipe) =>
-    favoriteRecipes.includes(recipe.id)
-  ):[];
+    useEffect(() => {
+        const favouriteRecipes = JSON.parse(localStorage.getItem('favouriteRecipe')) || [];
+        setFavouriteRecipes(favouriteRecipes);
+    }, []);
 
-  return (
-    <div>
-      <h2>Favorite Recipes</h2>
-      {favoriteList.length > 0 ? (
-        favoriteList.map((recipe) => (
-          <div key={recipe.id}>
-            <h3>{recipe.name}</h3>
-            <img src={recipe.image} alt={recipe.name} />
-          </div>
-        ))
-      ) : (
-        <p>No favorite recipes yet!</p>
-      )}
-    </div>
-  );
+    return (
+        <div>
+            <h2>Favourite Recipes</h2>
+            {favouriteRecipes.length === 0 ? (
+                <p>No favorite recipes found.</p>
+            ) : (
+                <ul>
+                    {favouriteRecipes.map((recipe, index) => (
+                        <li key={index}>
+                            <h3>{recipe.title}</h3>
+                            <img src={recipe.image} alt={recipe.title} />
+                            <p>Servings: {recipe.servings}</p>
+                        <p>Ready in: {recipe.readyInMinutes} minutes</p>
+                       <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
 };
 
-export default FavoriteRecipes;
-
-
+export default FavouriteRecipes;
