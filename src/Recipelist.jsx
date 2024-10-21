@@ -68,7 +68,7 @@ const handleNewPage = (newPage) => {
     {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul className="flex items-center justify-between gap-4 p-4">
+        <ul>
           {recipeslist.map((recipe, index) => (
             <div >
             <li key={index} >
@@ -80,7 +80,7 @@ const handleNewPage = (newPage) => {
         </ul>
       )}
     {total > limit && (
-        <div className='flex justify-center'>
+        <div className='flex justify-end mr-1'>
           <button  onClick={() => handleNewPage(currentPage - 1)}
             disabled={currentPage === 1} className='mr-2 bg-slate-500 text-white'
             >Previous</button>
