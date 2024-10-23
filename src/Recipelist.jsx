@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Footer from './Footer';
 import axios from 'axios'
+import Loading from 'react-loading'
 
 const Recipelist = () => {
     const [recipeslist, setRecipeslist] = useState([]);
@@ -68,7 +69,10 @@ const handleNewPage = (newPage) => {
 
 
     {loading ? (
+        <div className='flex  flex-col items-center justify-center'>
+          <Loading type='spin' color='black' height={50} width={50} />
         <p>Loading...</p>
+        </div>
       ) : (
         <ul className='md:grid grid-cols-1grid grid-cols-4'>
           {recipeslist.map((recipe, index) => (

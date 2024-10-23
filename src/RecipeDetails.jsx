@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loading from "react-loading";
 
 const RecipeDetails = () => {
   const [recipes, setRecipes] = useState([]);
@@ -88,17 +89,21 @@ const handleExpand = (recipeId) => {
  
 
   return (
-    <div className="bg-sky-500/50  w-full">
+    
+    <div className="bg-sky-500  w-full flex items-center justify-center min-h-screen">
       
       {loading ? (
-        <p className="text-center text-2xl">Loading...</p>
+        <div className="flex flex-col items-center">
+          <Loading type="spin" color="#000" width={50} height={50} />
+          <p className="text-center text-2xl">Loading...</p>
+        </div>
       ) : error ? (
         <p>{error}</p>
       ) : recipes && recipes.length === 0 ? (
         <p>No recipes found</p>
       ) : (
         
-        <ul className=" md:grid grid-cols-1grid grid-cols-3 ">
+        <ul className="ml-8 mt-4 md:grid grid-cols-1grid grid-cols-3 ">
           {recipes.map((recipe) => (
             <li key={recipe.id}>
               <div className="mt-2 ">
@@ -115,7 +120,7 @@ const handleExpand = (recipeId) => {
           <p>{recipe.summary.substring(0, 40)}...</p> // Shortened summary for collapsed view
         )}
            </div>
-           <div className="flex gap-1">
+           <div className="flex gap-16">
             <button className="bg-white text-blue p-1  rounded-lg hover:bg-black text-indigo-400" onClick={() => handleExpand(recipe.id)}>{Expanded[recipe.id] ? "seeless" : "Seemore"}</button>
            <button className="bg-white text-blue p-1 rounded-lg hover:bg-black text-indigo-500" onClick={()=>Handlefavorite(recipe)}>Add-to-favoritelist</button>
            </div>
@@ -127,6 +132,7 @@ const handleExpand = (recipeId) => {
        
     </div>
   );
+
 };
 
 export default RecipeDetails;
