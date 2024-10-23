@@ -70,12 +70,12 @@ const handleNewPage = (newPage) => {
     {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul className='grid grid-cols-4'>
+        <ul className='md:grid grid-cols-1grid grid-cols-4'>
           {recipeslist.map((recipe, index) => (
             <div >
             <li key={index} >
                 {recipe.title}
-                <img src={recipe.image} alt={recipe.title} />
+                <img  className='md:justify-center ml-5'src={recipe.image} alt={recipe.title} />
                 </li> 
                 </div>
           ))}
