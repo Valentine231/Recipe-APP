@@ -7,6 +7,7 @@ const RecipeDetails = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [FavouriteRecipe, setFavouriteRecipe] = useState([]);
+  const [Expanded, setExpanded] = useState({});
   const navigate = useNavigate();
 
 
@@ -21,11 +22,12 @@ const RecipeDetails = () => {
           params: {
             apiKey: Apikey,
             addRecipeInformation:true,
+            number: 9,
 
          
           },
         });
-        console.log(response.data);
+        
 
         if (response.data && response.data.results) {
           setRecipes(response.data.results)
@@ -79,28 +81,44 @@ const RecipeDetails = () => {
 
     navigate('/favouriteRecipe'); // Navigate to favorites
 };
+
+const handleExpand = (recipeId) => {
+  setExpanded((prev) => ({ ...prev, [recipeId]: !prev[recipeId] }));
+}
  
 
   return (
     <div className="bg-sky-500/50  w-full">
+      
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-center text-2xl">Loading...</p>
       ) : error ? (
         <p>{error}</p>
       ) : recipes && recipes.length === 0 ? (
         <p>No recipes found</p>
       ) : (
-        <ul>
+        
+        <ul className="grid grid-cols-3">
           {recipes.map((recipe) => (
             <li key={recipe.id}>
-              <div className="mt-2">
-               <span>{recipe.title}</span>
-               <img src={recipe.image} alt={recipe.title} className="w-80 h-auto" />
+              <div className="mt-2 ">
+               <p>{recipe.title}</p>
+               <img src={recipe.image} alt={recipe.title} className="w-50 h-auto" />
               <p>Servings: {recipe.servings}</p>
             <p>Ready in: {recipe.readyInMinutes} minutes</p>
-           <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
+            {Expanded[recipe.id] ? (
+          <div>
+            <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
+            
+          </div>
+        ) : (
+          <p>{recipe.summary.substring(0, 40)}...</p> // Shortened summary for collapsed view
+        )}
            </div>
-           <button className="bg-black text-white p-2  " onClick={()=>Handlefavorite(recipe)}>Add-to-favoritelist</button>
+           <div className="flex gap-1">
+            <button className="bg-white text-blue p-1  rounded-lg hover:bg-black text-indigo-400" onClick={() => handleExpand(recipe.id)}>{Expanded[recipe.id] ? "seeless" : "Seemore"}</button>
+           <button className="bg-white text-blue p-1 rounded-lg hover:bg-black text-indigo-500" onClick={()=>Handlefavorite(recipe)}>Add-to-favoritelist</button>
+           </div>
             </li>
           ))}
         </ul>

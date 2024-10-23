@@ -4,6 +4,7 @@ import './App.css'
 import Searchbar from './searchbar'
 import RecipeDetails from './RecipeDetails'
 import FavouriteRecipe from './FavouriteRecipe'
+import Footer from './Footer'
 import { Link } from 'react-router-dom'
 
 const App =()=> {
@@ -18,6 +19,7 @@ return (
   </div>
 
   <RecipeDetails />
+  <Footer />
 </div>
 
 

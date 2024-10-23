@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+
+
 
 const FavouriteRecipes = () => {
     const [favouriteRecipes, setFavouriteRecipes] = useState([]);
-    const [searchParams, setSearchParams] = useSearchParams();
+   
 
     useEffect(() => {
         const favouriteRecipes = JSON.parse(localStorage.getItem('favouriteRecipe')) || [];
         setFavouriteRecipes(favouriteRecipes);
     }, []);
 
-    const handleRemoverecipe=()=> {
-        const recipeId = searchParams.get('id');
+    const handleRemoverecipe=(recipeId)=> {
         const newFavouriteRecipes = favouriteRecipes.filter((recipe) => recipe.id !== recipeId);
         localStorage.setItem('favouriteRecipe', JSON.stringify(newFavouriteRecipes));
         setFavouriteRecipes(newFavouriteRecipes);
     }
 
+    // const clearRecipe = ()=> {
+    //     localStorage.removeItem('favouriteRecipe');
+
+    //     setFavouriteRecipes([]);
+    // }
     return (
+        <>
         <div>
             <h2>Favourite Recipes</h2>
             {favouriteRecipes.length === 0 ? (
@@ -31,12 +37,15 @@ const FavouriteRecipes = () => {
                             <p>Servings: {recipe.servings}</p>
                         <p>Ready in: {recipe.readyInMinutes} minutes</p>
                        <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
-                       <button onClick={()=>handleRemoverecipe} className='bg-indigo-500 text-white'>Remove-Recipe</button>
+                       <button onClick={()=>handleRemoverecipe(recipe.id)} className='bg-indigo-500 text-white rounded-lg hover:text-black'>Remove-Recipe</button>
                         </li>
                     ))}
                 </ul>
             )}
+            
         </div>
+    
+        </>
     );
 };
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Footer from './Footer';
 import axios from 'axios'
 
 const Recipelist = () => {
@@ -6,7 +7,7 @@ const Recipelist = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [total, setTotal] = useState(0);
-    const [limit, setLimit] = useState(5);
+    const [limit, setLimit] = useState(12);
     const [currentPage, setCurrentPage] = useState(1);
 
 
@@ -58,6 +59,7 @@ const handleNewPage = (newPage) => {
   };
 
   return (
+    <>
     <div className='bg-sky-300 w-full h-full'>
     <div>
         <h1 className="text-gray-700 font-bold text-2xl">Recipe List</h1>
@@ -68,7 +70,7 @@ const handleNewPage = (newPage) => {
     {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className='grid grid-cols-4'>
           {recipeslist.map((recipe, index) => (
             <div >
             <li key={index} >
@@ -80,18 +82,20 @@ const handleNewPage = (newPage) => {
         </ul>
       )}
     {total > limit && (
-        <div className='flex justify-end mr-1'>
+        <div className='flex justify-center mt-2 p-1 '>
           <button  onClick={() => handleNewPage(currentPage - 1)}
-            disabled={currentPage === 1} className='mr-2 bg-slate-500 text-white'
+            disabled={currentPage === 1} className='mr-2 bg-slate-500 text-white p-2 rounded-lg hover:text-indigo-300'
             >Previous</button>
           <button onClick={() => handleNewPage(currentPage + 1)}
             disabled={currentPage === Math.ceil(total / limit)}
-            className='ml-2 bg-black text-white'
+            className='ml-2 bg-black text-white p-2 rounded-lg hover:text-indigo-300'
             >Next</button>
         </div>
       )}
       </div>
 
+      <Footer />
+</>
   )
 }
 
