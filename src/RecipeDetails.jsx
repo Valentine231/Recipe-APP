@@ -98,12 +98,12 @@ const handleExpand = (recipeId) => {
         <p>No recipes found</p>
       ) : (
         
-        <ul className="grid grid-cols-3">
+        <ul className=" md:grid grid-cols-1grid grid-cols-3 ">
           {recipes.map((recipe) => (
             <li key={recipe.id}>
               <div className="mt-2 ">
                <p>{recipe.title}</p>
-               <img src={recipe.image} alt={recipe.title} className="w-50 h-auto" />
+               <img src={recipe.image} alt={recipe.title} className="w-50 h-auto  md:justify-center ml-3" />
               <p>Servings: {recipe.servings}</p>
             <p>Ready in: {recipe.readyInMinutes} minutes</p>
             {Expanded[recipe.id] ? (
