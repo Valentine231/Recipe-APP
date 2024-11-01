@@ -63,7 +63,7 @@ const handleNewPage = (newPage) => {
     <>
     <div className='bg-sky-300 w-full h-full'>
     <div>
-        <h1 className="text-gray-700 font-bold text-2xl">Recipe List</h1>
+        <h1 className=" font-bold text-2xl">Recipe List</h1>
 
     </div>
 
@@ -74,12 +74,12 @@ const handleNewPage = (newPage) => {
         <p>Loading...</p>
         </div>
       ) : (
-        <ul className='md:grid grid-cols-1grid grid-cols-4'>
+        <ul className='grid grid-cols-4 mt-4 ml-1 md:grid-cols-3 gap-3 justify-center items-center font-bold sm:grid-cols-3'>
           {recipeslist.map((recipe, index) => (
             <div >
             <li key={index} >
                 {recipe.title}
-                <img  className='md:justify-center ml-5'src={recipe.image} alt={recipe.title} />
+                <img src={recipe.image} alt={recipe.title} />
                 </li> 
                 </div>
           ))}

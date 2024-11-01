@@ -90,7 +90,7 @@ const handleExpand = (recipeId) => {
 
   return (
     
-    <div className="bg-sky-500  w-full flex items-center justify-center min-h-screen">
+    <div className="border-gray-200 rounded-lg  w-full flex items-center justify-center min-h-screen">
       
       {loading ? (
         <div className="flex flex-col items-center">
@@ -103,21 +103,21 @@ const handleExpand = (recipeId) => {
         <p>No recipes found</p>
       ) : (
         
-        <ul className="ml-8 mt-4 md:grid grid-cols-1grid grid-cols-3 ">
+        <ul className="ml-4 mt-4 md:grid grid-cols-1grid grid-cols-3 items-center gap-4  sm:items-center mr-5">
           {recipes.map((recipe) => (
             <li key={recipe.id}>
               <div className="mt-2 ">
-               <p>{recipe.title}</p>
-               <img src={recipe.image} alt={recipe.title} className="w-50 h-auto  md:justify-center ml-3" />
-              <p>Servings: {recipe.servings}</p>
-            <p>Ready in: {recipe.readyInMinutes} minutes</p>
+               <p className="ml-3">{recipe.title}</p>
+               <img src={recipe.image} alt={recipe.title} className="w-50 h-auto md:justify-center ml-3" />
+              <p className="ml-3">Servings: {recipe.servings}</p>
+            <p className="ml-3" >Ready in: {recipe.readyInMinutes} minutes</p>
             {Expanded[recipe.id] ? (
           <div>
             <p dangerouslySetInnerHTML={{ __html: recipe.summary }}></p>
             
           </div>
         ) : (
-          <p>{recipe.summary.substring(0, 40)}...</p> // Shortened summary for collapsed view
+          <p className="ml-3">{recipe.summary.substring(0, 40)}...</p> // Shortened summary for collapsed view
         )}
            </div>
            <div className="flex gap-16">

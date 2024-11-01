@@ -5,6 +5,7 @@ const Searchbar = () => {
   const [searchbar, setSearchbar] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const Apikey = "74153c31338d4bdf8f3de040b57c504c"; // Make sure this is a valid API key
 
@@ -35,20 +36,27 @@ const Searchbar = () => {
     setSearchbar(e.target.value);
   };
 
+  const handlesearch=()=>{
+    if(searchbar.length>2){
+      setShow(searchbar)
+    }
+  }
+
   return (
-    <div>
+    <div className='flex items-center relative'>
       <input 
         type="search" 
         placeholder="Search..." 
         value={searchbar} 
         onChange={handleSearchEvent} 
         className='p-2 border border-gray-300 rounded-lg w-full'
+        
       />
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul  className="sticky top-0 ...">
+      <button  className="ml-2 p-2 bg-blue-500 text-white rounded-lg" onClick={handlesearch}>search</button>
+
+      {show && (
+        <ul  className="absolute top-7 left-1  m-auto text-xs p-4 bg-white z-10 border border-gray-300 rounded-lg mt-3">
           {results.map((result, index) => (
           
               <li key={index}>{result.title}</li>
