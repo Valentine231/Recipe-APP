@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Footer from './Footer';
 import axios from 'axios'
 import Loading from 'react-loading'
+import Navbar from './Navbar';
 
 const Recipelist = () => {
     const [recipeslist, setRecipeslist] = useState([]);
@@ -62,6 +63,7 @@ const handleNewPage = (newPage) => {
   return (
     <>
     <div className='bg-sky-300 w-full h-full'>
+      <Navbar />
     <div>
         <h1 className=" font-bold text-2xl">Recipe List</h1>
 
@@ -74,7 +76,7 @@ const handleNewPage = (newPage) => {
         <p>Loading...</p>
         </div>
       ) : (
-        <ul className='grid grid-cols-4 mt-4 ml-1 md:grid-cols-3 gap-3 justify-center items-center font-bold sm:grid-cols-3'>
+        <ul className='grid grid-cols-3 mt-4 ml-1  gap-3 justify-center items-center font-bold '>
           {recipeslist.map((recipe, index) => (
             <div >
             <li key={index} >

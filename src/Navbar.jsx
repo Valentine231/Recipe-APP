@@ -23,8 +23,12 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <ul className={`flex-col md:flex-row md:flex md:justify-between gap-4 ${isOpen ? 'flex' : 'hidden'} md:flex`}>
+         
+        <li>
+            <NavLink to='/recipedetails' className="text-gray-700 hover:text-blue-500">RecipeDetail</NavLink>
+          </li>
           <li>
-            <NavLink to='/recipelist' className="text-gray-700 hover:text-blue-500">Recipe List</NavLink>
+            <NavLink to='/recipelist' className="text-gray-700 hover:text-blue-500">RecipeList</NavLink>
           </li>
           <li>
             <NavLink to='/favouriterecipe' className="text-gray-700 hover:text-blue-500">Favourite</NavLink>

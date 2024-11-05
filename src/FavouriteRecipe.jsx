@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 
 
 
@@ -26,6 +27,7 @@ const FavouriteRecipes = () => {
         <>
         <div>
             <h2>Favourite Recipes</h2>
+            <Navbar />
             {favouriteRecipes.length === 0 ? (
                 <p>No favorite recipes found.</p>
             ) : (
