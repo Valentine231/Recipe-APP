@@ -43,7 +43,9 @@ const Searchbar = () => {
   }
 
   return (
-    <div className='flex items-center relative'>
+    <div className='relative'>
+    <div className='flex items-center '>
+      <div className='relative w-full'>
       <input 
         type="search" 
         placeholder="Search..." 
@@ -53,10 +55,12 @@ const Searchbar = () => {
         
       />
 
-      <button  className="ml-2 p-2 bg-blue-500 text-white rounded-lg" onClick={handlesearch}>search</button>
-
+      <button  className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2   text-white rounded-lg" onClick={handlesearch}>
+      <img className=" w-9 rounded-lg" src="https://cdn-icons-png.flaticon.com/128/54/54481.png" alt="" />
+      </button>
+  </div>
       {show && (
-        <ul  className="absolute top-7 left-1  m-auto text-xs p-4 bg-white z-10 border border-gray-300 rounded-lg mt-3">
+        <ul  className="absolute top-7 left-0  m-auto  p-4 bg-white z-10 border border-gray-300 rounded-lg mt-3">
           {results.map((result, index) => (
           
               <li key={index}>{result.title}</li>
@@ -65,6 +69,7 @@ const Searchbar = () => {
           ))}
         </ul>
       )}
+    </div>
     </div>
   );
 };

@@ -21,7 +21,7 @@ useEffect(() => {
             const response = await axios.get('https://api.spoonacular.com/recipes/complexSearch',{
                 params: {
                     apiKey: Apikey,
-                  // sample query parameter
+                   // sample query parameter
                     number: limit,
                     offset: (currentPage - 1) * limit,
                     

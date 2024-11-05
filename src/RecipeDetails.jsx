@@ -89,6 +89,7 @@ const handleExpand = (recipeId) => {
  
 
   return (
+    <>
     
     <div className="border-gray-200 rounded-lg  w-full flex items-center justify-center min-h-screen">
       
@@ -131,6 +132,7 @@ const handleExpand = (recipeId) => {
       
        
     </div>
+    </>
   );
 
 };
