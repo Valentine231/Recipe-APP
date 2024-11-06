@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loading from "react-loading";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const RecipeDetails = () => {
   const [recipes, setRecipes] = useState([]);
@@ -90,8 +92,8 @@ const handleExpand = (recipeId) => {
 
   return (
     <>
-    
-    <div className="border-gray-200 rounded-lg  w-full flex items-center justify-center min-h-screen">
+    <Navbar />
+    <div className="border-gray-200 rounded-lg  w-full flex items-center justify-center min-h-screen gap-[6rem]">
       
       {loading ? (
         <div className="flex flex-col items-center">
@@ -132,6 +134,7 @@ const handleExpand = (recipeId) => {
       
        
     </div>
+    <Footer />
     </>
   );
 

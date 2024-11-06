@@ -76,11 +76,11 @@ const handleNewPage = (newPage) => {
         <p>Loading...</p>
         </div>
       ) : (
-        <ul className='grid grid-cols-3 mt-4 ml-1  gap-3 justify-center items-center font-bold '>
+        <ul className='grid grid-cols-3 mt-4 ml-1  gap-3 justify-center items-center font-bold md:grid grid-cols-1 relative left-[1.2rem] '>
           {recipeslist.map((recipe, index) => (
             <div >
             <li key={index} >
-                {recipe.title}
+                <p className='w-3/4 text-[12px]'>{recipe.title}</p>
                 <img src={recipe.image} alt={recipe.title} />
                 </li> 
                 </div>
@@ -88,13 +88,13 @@ const handleNewPage = (newPage) => {
         </ul>
       )}
     {total > limit && (
-        <div className='flex justify-center mt-2 p-1 '>
+        <div className='flex justify-between mt-2 p-1 relative'>
           <button  onClick={() => handleNewPage(currentPage - 1)}
-            disabled={currentPage === 1} className='mr-2 bg-slate-500 text-white p-2 rounded-lg hover:text-indigo-300'
+            disabled={currentPage === 1} className='mr-2 bg-slate-500 text-white p-2 rounded-lg hover:text-indigo-300 md:ml-6' 
             >Previous</button>
           <button onClick={() => handleNewPage(currentPage + 1)}
             disabled={currentPage === Math.ceil(total / limit)}
-            className='ml-2 bg-black text-white p-2 rounded-lg hover:text-indigo-300'
+            className='ml-2 bg-black text-white p-2 rounded-lg hover:text-indigo-300 md:mr-6'
             >Next</button>
         </div>
       )}
